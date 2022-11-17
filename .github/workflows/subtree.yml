@@ -18,9 +18,9 @@ jobs:
         with:
           token: ${{ steps.token.outputs.token }}
           fetch-depth: 0
-      - name: Confiture git
+      - name: Configure git
         run: |
-          git remote add packages-common --no-tags https://github.com/franklinkim/git-subtree-poc-common.git
+          git remote add git-subtree-poc-common --no-tags https://github.com/franklinkim/git-subtree-poc-common.git
       - name: Git subtree push
         run: |
-          git subtree push --prefix=packages/common packages-common fork/project-b --squash --message "Merge ${{ env.GITHUB_SHA }} from ${{ env.GITHUB_REF_NAME }} ${{ env.GITHUB_REPOSITORY }}" 
+          git subtree push --prefix=packages/common git-subtree-poc-common fork/project-b
