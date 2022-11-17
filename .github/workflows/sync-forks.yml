@@ -8,15 +8,15 @@ jobs:
   sync:
     name: Create PRs
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        fork: 
-          - project-a
-          - project-b
     steps:
       - uses: actions/checkout@v3
-      - uses: poorva17/create-pr-action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: fork/${{ matrix.fork }}
-          HEAD_BRANCH: main
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+      - name: Sync Branches PR
+        uses: monoku/sync-branches-pr@0.0.1
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SOURCE_BRANCH: "main"
+          TARGET_BRANCH_STARTS_WITH: "fork/"
