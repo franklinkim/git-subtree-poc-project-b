@@ -17,4 +17,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: gorillio/github-action-cherry-pick@master
         with:
-          pr_branch: ${{ matrix.fork }}
+          pr_branch: fork/${{ matrix.fork }}
