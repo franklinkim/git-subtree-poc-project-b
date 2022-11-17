@@ -15,6 +15,8 @@ jobs:
           - project-b
     steps:
       - uses: actions/checkout@v3
-      - uses: gorillio/github-action-cherry-pick@master
-        with:
-          pr_branch: fork/${{ matrix.fork }}
+      - uses: poorva17/create-pr-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_BRANCH: fork/${{ matrix.fork }}
+          BASE_BRANCH: main
