@@ -9,14 +9,14 @@ jobs:
     name: Sync git subtrees
     runs-on: ubuntu-latest
     steps:
-      - id: token
-        uses: getsentry/action-github-app-token@v1
+      - id: app-token-provider
+        uses: tibdex/github-app-token@v1
         with:
           app_id: ${{ secrets.ACCESS_TOKEN_APP_ID }}
           private_key: ${{ secrets.ACCESS_TOKEN_APP_PRIVATE_KEY }}
       - uses: actions/checkout@v3
         with:
-          token: ${{ steps.token.outputs.token }}
+          token: ${{ steps.app-token-provider.outputs.token }}
           fetch-depth: 0
       - name: Configure git
         run: |
