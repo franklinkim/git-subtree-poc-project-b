@@ -6,14 +6,16 @@ on:
 
 jobs:
   push:
-    name: Push subtrees
+    name: Sync git subtrees
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           fetch-depth: 0
-      - name: packages-common
+      - name: Confiture git
         run: |
           git remote add packages-common --no-tags https://github.com/franklinkim/git-subtree-poc-common.git
-          git subtree push --prefix=packages/common packages-common fork/project-b
+      - name: Git subtree push
+        run: |
+          git subtree push --prefix=packages/common packages-common fork/project-b --squash --message "Merge ${{ env.GITHUB_SHA }} from ${{ env.GITHUB_REF_NAME }} ${{ env.GITHUB_REPOSITORY }} " 
