@@ -6,7 +6,7 @@ on:
 
 jobs:
   sync:
-    name: Create PRs
+    name: Create PR
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,10 +15,9 @@ jobs:
           - project-b
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          git checkout -b 
       - uses: repo-sync/pull-request@v2
         with:
-          pr_title: "Merge ${{ github.ref }} into fork/${{ matrix.fork }}"
-          destination_branch: "fork/${{ matrix.fork }}"
           pr_allow_empty: false
+          destination_branch: "fork/${{ matrix.fork }}"
+          pr_title: "Merge ${{ github.ref }} into fork/${{ matrix.fork }}"
+          pr_label: "sync"
