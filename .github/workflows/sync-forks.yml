@@ -19,5 +19,5 @@ jobs:
         with:
           pr_allow_empty: false
           destination_branch: "fork/${{ matrix.fork }}"
-          pr_title: "Merge ${{ github.ref }} into fork/${{ matrix.fork }}"
-          pr_label: "sync"
+          pr_title: "Merge ${{ env.GITHUB_REF_NAME }} into fork/${{ matrix.fork }}"
+          pr_label: "github action"
