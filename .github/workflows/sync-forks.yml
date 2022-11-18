@@ -15,8 +15,10 @@ jobs:
           - project-b
     steps:
       - uses: actions/checkout@v3
-      - uses: LucasRuy/sync-branch-action@v1.1.1
+      - run: |
+          git checkout -b 
+      - uses: repo-sync/pull-request@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SOURCE_BRANCH: 'main'
-          DESTINATION_BRANCH: "fork/${{ matrix.fork }}"
+          pr_title: "Merge ${{ github.ref }} into fork/${{ matrix.fork }}"
+          destination_branch: "fork/${{ matrix.fork }}"
+          pr_allow_empty: false
